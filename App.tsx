@@ -11,20 +11,19 @@ import {
 const App = () => {
   const [task, setTask] = useState('');
   const [tasks, setTasks] = useState([]);
+  // const [editIndex, setEditIndex] = useState(false);
   const [editIndex, setEditIndex] = useState(-1);
 
   const handleAddTask = () => {
-    if (task) {
-      if (editIndex !== -1) {
-        const updatedTasks = [...tasks];
-        updatedTasks[editIndex] = task;
-        setTasks(updatedTasks);
-        setEditIndex(-1);
-      } else {
-        setTasks([tasks, task]);
-      }
-      setTask('');
+    if (editIndex !== -1) {
+      const updatedTasks = [...tasks];
+      updatedTasks[editIndex] = task;
+      setTasks(updatedTasks);
+      setEditIndex(-1);
+    } else {
+      setTasks([...tasks, task]);
     }
+    setTask('');
   };
 
   const handleEditTask = index => {
@@ -59,6 +58,7 @@ const App = () => {
   // OneSignal.Notifications.addEventListener('click', (event) => {
   //   console.log('OneSignal: notification clicked:', event);
   // });
+  console.log(tasks);
   return (
     <View style={styles.container}>
       <Text style={styles.title}>ToDo App</Text>
